@@ -6,7 +6,7 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 // GET
-router.get('/', (req, re) => {
+router.get('/', (req, res) => {
     let queryText = 'SELECT * FROM "Koala_Bears";';
     pool.query(queryText)
     .then(result => {
