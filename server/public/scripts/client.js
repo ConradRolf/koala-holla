@@ -8,7 +8,7 @@ function onReady() {
   // load existing koalas on page load
   getKoalas();
 
-  $('#viewKoalas').on('click', '#tranferButton', updateKoala);
+  // $('#viewKoalas').on('click', '#tranferButton', updateKoala);
   $('#addButton').on('click', postKoalas);
   $('#viewKoalas').on('click', '#delete-btn', deleteKoala);
 }; // end doc ready
@@ -70,21 +70,21 @@ function postKoalas() {
   });
 };
 
-function updateKoala(event){
-  event.preventDefault();
-    console.log('Koala ready for transfer')
-    const idToUpdate = $(this).closest('tr').data('id');
+// function updateKoala(event){
+//   event.preventDefault();
+//     console.log('Koala ready for transfer')
+//     const idToUpdate = $(this).closest('tr').data('id');
 
-    $.ajax({
-        type: 'PUT',
-        url: `/koalas/${idToUpdate}`,
-    }).then(function (response) {
-        console.log(response)
-        getKoalas();
-    }).catch(function (error) {
-        console.log('Error with update song: ', error);
-    })
-}
+//     $.ajax({
+//         type: 'PUT',
+//         url: `/koalas/${idToUpdate}`,
+//     }).then(function (response) {
+//         console.log(response)
+//         getKoalas();
+//     }).catch(function (error) {
+//         console.log('Error with update song: ', error);
+//     })
+// }
 
 function deleteKoala() {
 
