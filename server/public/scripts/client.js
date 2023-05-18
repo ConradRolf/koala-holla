@@ -14,6 +14,7 @@ function onReady() {
 }; // end doc ready
 
 function getKoalas(){
+  $('#viewKoalas').empty();
   console.log( 'in getKoalas' );
   // ajax call to server to get koalas
   $.ajax({
@@ -29,7 +30,7 @@ function getKoalas(){
        <td>${response[i].gender}</td>
        <td>${response[i].readyForTransfer}</td>
        <td>${response[i].notes}</td>
-       <button id="delete-btn">Delete Koala? 🥲</button>
+       <td><button id="delete-btn">Delete Koala? 🥲</button></td>
       </tr>
 
       `);
@@ -38,6 +39,8 @@ function getKoalas(){
     console.log('Error', error);
     res.sendStatus(500)
   })
+  //
+ 
 } // end getKoalas
 
 
@@ -94,7 +97,7 @@ function deleteKoala() {
 
   $.ajax({
       type: 'DELETE',
-      url: `/koala/${koalaToDelete}`
+      url: `/koalas/${koalaToDelete}`
   }).then(function (response) {
       getKoalas();
   }).catch(function (error) {
