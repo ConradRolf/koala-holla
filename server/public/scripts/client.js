@@ -8,36 +8,9 @@ function onReady() {
   // load existing koalas on page load
   getKoalas();
 
-
+  $('#viewKoalas').on('click', '#tranferButton', updateKoala);
   $('#addButton').on('click', postKoalas);
 }; // end doc ready
-
-function setupClickListeners() {}
-  // $( '#addButton' ).on( 'click', postKoalas(){
-  //   console.log( 'in addButton on click' );
-
-  $('#viewKoalas').on('click', '#tranferButton', updateKoala);
-}); // end doc ready
-
-function setupClickListeners() {
-
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
-
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
-//     let koalaToSend = {
-//       name: 'testName',
-//       age: 'testName',
-//       gender: 'testName',
-//       readyForTransfer: 'testName',
-//       notes: 'testName',
-//     };
-//     // call saveKoala with the new obejct
-//     saveKoala( koalaToSend );
-//   }); 
-// }
 
 function getKoalas(){
   console.log( 'in getKoalas' );
