@@ -29,6 +29,7 @@ function getKoalas(){
        <td>${response[i].gender}</td>
        <td>${response[i].readyForTransfer}</td>
        <td>${response[i].notes}</td>
+       <button id="delete-btn">Delete Koala? 🥲</button>
       </tr>
 
       `);
@@ -98,7 +99,3 @@ function deleteKoala() {
       console.log('Error with delete function: ', error);
   })
 }
-
-
-
-
