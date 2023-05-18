@@ -1,32 +1,17 @@
 console.log( 'js' );
 
-$( document ).ready( function(){
+$(document).ready(onReady);
+
+function onReady() {
   console.log( 'JQ' );
   // Establish Click Listeners
-  setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+
   $('#viewKoalas').on('click', '#tranferButton', updateKoala);
-}); // end doc ready
-
-function setupClickListeners() {
-
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
-    let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
-    };
-    // call saveKoala with the new obejct
-    saveKoala( koalaToSend );
-  }); 
-}
+  $('#addButton').on('click', postKoalas);
+  $('#viewKoalas').on('click', '#delete-btn', deleteKoala);
+}; // end doc ready
 
 function getKoalas(){
   console.log( 'in getKoalas' );
@@ -60,164 +45,27 @@ function saveKoala( newKoala ){
  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function postKoalas() {
+  let koalaToSend = {
+    name: $('#nameIn').val(),
+    age: $('#ageIn').val(),
+    gender: $('#genderIn').val(),
+    readyForTransfer: $('#readyForTransferIn').val(),
+    notes: $('#notesIn').val()
+  };
+  $.ajax({
+      type: 'POST',
+      url: '/koalas',
+      data: koalaToSend
+  }).then(function(response) {
+    $('#nameIn').val(''),
+    $('#ageIn').val(''),
+    $('#genderIn').val(''),
+    $('#readyForTransferIn').val(''),
+    $('#notesIn').val('')
+      getKoalas();
+  });
+};
 
 function updateKoala(event){
   event.preventDefault();
@@ -235,76 +83,6 @@ function updateKoala(event){
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//add to onLoad function
-$('#viewKoalas').on('click', '#delete-btn', deleteKoala);
-
-
-//add delete button to render function
-
-
 function deleteKoala() {
 
   const koalaToDelete = $(this).closest('tr').data('id');
@@ -320,6 +98,7 @@ function deleteKoala() {
       console.log('Error with delete function: ', error);
   })
 }
+
 
 
 
