@@ -234,3 +234,92 @@ function updateKoala(event){
         console.log('Error with update song: ', error);
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//add to onLoad function
+$('#viewKoalas').on('click', '#delete-btn', deleteKoala);
+
+
+//add delete button to render function
+
+
+function deleteKoala() {
+
+  const koalaToDelete = $(this).closest('tr').data('id');
+
+  console.log("Inside delete function. Koala to delete:", koalaToDelete);
+
+  $.ajax({
+      type: 'DELETE',
+      url: `/koala/${koalaToDelete}`
+  }).then(function (response) {
+      getKoalas();
+  }).catch(function (error) {
+      console.log('Error with delete function: ', error);
+  })
+}
+
+
+
