@@ -6,10 +6,11 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
+  $('#viewKoalas').on('click', '#tranferButton', updateKoala);
 }); // end doc ready
 
 function setupClickListeners() {
+
   $( '#addButton' ).on( 'click', function(){
     console.log( 'in addButton on click' );
     // get user input and put in an object
@@ -37,4 +38,179 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updateKoala(event){
+  event.preventDefault();
+    console.log('Koala ready for transfer')
+    const idToUpdate = $(this).closest('tr').data('id');
+
+    $.ajax({
+        type: 'PUT',
+        url: `/koalas/${idToUpdate}`,
+    }).then(function (response) {
+        console.log(response)
+        getKoalas();
+    }).catch(function (error) {
+        console.log('Error with update song: ', error);
+    })
 }
