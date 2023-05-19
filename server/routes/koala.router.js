@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         res.send(result.rows);
     })
     .catch(error => {
-        console,log('query:', queryText, 'Error', error);
+        console.log('query:', queryText, 'Error', error);
         res.sendStatus(500);
     })
 });
@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
         `;
         
     // these values are substituted for $1, $2, $3, $4, $5
-        let values = [newKoala.name, newKoala.age, newKoala.gender, newKoala.readyForTransfer, newKoala.notes];
+        let values = [newKoala.name, newKoala.age, newKoala.gender, newKoala.ready_for_transfer, newKoala.notes];
     
     // pass queryText and array of values
         pool.query(queryText, values)
@@ -43,6 +43,21 @@ router.post('/', (req, res) => {
     });
 
 // PUT
+router.put('/:id', (req, res) => {
+    let idToUpdate = req.params.id;
+    
+    queryText = 'UPDATE "Koala_Bears" SET "ready_for_transfer" = True WHERE "id"=$1';
+
+    pool.query(queryText, [idToUpdate])
+    .then(result => {
+        console.log('koala updated', result.rows);
+        res.sendStatus(200);
+    })
+    .catch((error) => {
+        console.log('Error making update query', error);
+        res.sendStatus(500);
+    })
+})
 
 router.delete('/:id', (req, res) => {
     let koalaToDelete = req.params.id;
