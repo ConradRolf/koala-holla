@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     let idToUpdate = req.params.id;
     
-    queryText = 'UPDATE "Koala_Bears" SET "ready_for_transfer" = True WHERE "id"=$1';
+    queryText = `UPDATE "Koala_Bears" SET "ready_for_transfer" = 'true' WHERE "id"=$1`;
 
     pool.query(queryText, [idToUpdate])
     .then(result => {
