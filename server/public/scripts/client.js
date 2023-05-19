@@ -8,7 +8,7 @@ function onReady() {
   // load existing koalas on page load
   getKoalas();
 
-  // $('#viewKoalas').on('click', '#tranferButton', updateKoala);
+  $('#viewKoalas').on('click', '#transfer-btn', updateKoala);
   $('#addButton').on('click', postKoalas);
   $('#viewKoalas').on('click', '#delete-btn', deleteKoala);
 }; // end doc ready
@@ -23,17 +23,30 @@ function getKoalas(){
   }).then(function(response) {
     console.log('GET, /koalas', response);
     for (let i= 0; i , response.length; i++) {
+      if (response[i].ready_for_transfer === 'True'){
+        console.log('ready for transfer: ', response[i].ready_for_transfer)
       $('#viewKoalas').append(`
       <tr data-id=${response[i].id}>
        <td>${response[i].name}</td>
        <td>${response[i].age}</td>
        <td>${response[i].gender}</td>
-       <td>${response[i].readyForTransfer}</td>
+       <td>${response[i].ready_for_transfer}</td>
        <td>${response[i].notes}</td>
        <td><button id="delete-btn">Delete Koala? 🥲</button></td>
       </tr>
 
-      `);
+      `);} 
+      else if (response[i].ready_for_transfer === 'False'){
+      $('#viewKoalas').append(`
+      <tr data-id=${response[i].id}>
+       <td>${response[i].name}</td>
+       <td>${response[i].age}</td>
+       <td>${response[i].gender}</td>
+       <td>${response[i].ready_for_transfer} <button id="transfer-btn">Transfer?</button></td>
+       <td>${response[i].notes}</td>
+       <td><button id="delete-btn">Delete Koala? 🥲</button></td>
+      </tr>
+      `)}
     }
   }).catch(error => {
     console.log('Error', error);
@@ -42,20 +55,12 @@ function getKoalas(){
  
 } // end getKoalas
 
-
-
-function saveKoala( newKoala ){
-  console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- 
-}
-
 function postKoalas() {
   let koalaToSend = {
     name: $('#nameIn').val(),
     age: $('#ageIn').val(),
     gender: $('#genderIn').val(),
-    readyForTransfer: $('#readyForTransferIn').val(),
+    ready_for_transfer: $('#readyForTransferIn').val(),
     notes: $('#notesIn').val()
   };
   $.ajax({
@@ -72,21 +77,21 @@ function postKoalas() {
   });
 };
 
-// function updateKoala(event){
-//   event.preventDefault();
-//     console.log('Koala ready for transfer')
-//     const idToUpdate = $(this).closest('tr').data('id');
+function updateKoala(event){
+  event.preventDefault();
+    console.log('Koala ready for transfer')
+    const idToUpdate = $(this).closest('tr').data('id');
 
-//     $.ajax({
-//         type: 'PUT',
-//         url: `/koalas/${idToUpdate}`,
-//     }).then(function (response) {
-//         console.log(response)
-//         getKoalas();
-//     }).catch(function (error) {
-//         console.log('Error with update song: ', error);
-//     })
-// }
+    $.ajax({
+        type: 'PUT',
+        url: `/koalas/${idToUpdate}`,
+    }).then(function (response) {
+        console.log(response)
+        getKoalas();
+    }).catch(function (error) {
+        console.log('Error with updating koala : ', error);
+    })
+}
 
 function deleteKoala() {
 
