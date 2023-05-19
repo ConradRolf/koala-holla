@@ -37,7 +37,6 @@ function getKoalas(){
     }
   }).catch(error => {
     console.log('Error', error);
-    res.sendStatus(500)
   })
   //
  
