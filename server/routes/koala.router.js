@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
         console.log('req.body:', req.body);
     // parameterized query:
         let queryText = `
-        INSERT INTO "Koala_Bears" ("name", "age", "gender", "ready for transfer", "notes")
+        INSERT INTO "Koala_Bears" ("name", "age", "gender", "ready_for_transfer", "notes")
         VALUES ($1, $2, $3, $4, $5);
         `;
         
