@@ -5,17 +5,18 @@
     <title>Koalla Holla</title>
     <script src="vendors/jquery-3.3.1.min.js" charset="utf-8"></script>
     <script src="scripts/client.js" charset="utf-8"></script>
-    <link rel="stylesheet" href="views/styles.css">
+    <link rel="stylesheet" href="public/style.css">
   </head>
   <body>
     <header>
-      <img src="images/icon.png" class="icon" />
+     
       <h1>Koala Holla</h1>
       <h3>1976 Llama Comma Drive</h2>
       <h3>Walla Walla, WA</h2>
     </header>
+    <h2>Add Koala</h2>
     <section id="addKoala">
-      <h2>Add Koala</h2>
+      
       <input type="text" id="nameIn" value="" placeholder="Name">
       <input type="number" id="ageIn" value="" placeholder="Age">
       <input type="text" id="genderIn" value="" placeholder="Gender">
@@ -25,7 +26,7 @@
     </section>
     <section>
       <h2>All Koalas</h2>
-      <table>
+      <table id="koalaTable">
         <thead>
           <tr>
             <th>Name</th>
