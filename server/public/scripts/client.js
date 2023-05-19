@@ -23,7 +23,7 @@ function getKoalas(){
   }).then(function(response) {
     console.log('GET, /koalas', response);
     for (let i= 0; i , response.length; i++) {
-      if (response[i].ready_for_transfer === 'True'){
+      if (response[i].ready_for_transfer == 'true'){
         console.log('ready for transfer: ', response[i].ready_for_transfer)
       $('#viewKoalas').append(`
       <tr data-id=${response[i].id}>
@@ -36,7 +36,7 @@ function getKoalas(){
       </tr>
 
       `);} 
-      else if (response[i].ready_for_transfer === 'False'){
+      else if (response[i].ready_for_transfer == 'false'){
       $('#viewKoalas').append(`
       <tr data-id=${response[i].id}>
        <td>${response[i].name}</td>
@@ -47,6 +47,18 @@ function getKoalas(){
        <td><button id="delete-btn">Delete Koala? 🥲</button></td>
       </tr>
       `)}
+      else {
+        $('#viewKoalas').append(`
+      <tr data-id=${response[i].id}>
+       <td>${response[i].name}</td>
+       <td>${response[i].age}</td>
+       <td>${response[i].gender}</td>
+       <td>${response[i].ready_for_transfer}</td>
+       <td>${response[i].notes}</td>
+       <td><button id="delete-btn">Delete Koala? 🥲</button></td>
+      </tr>
+
+      `);} 
     }
   }).catch(error => {
     console.log('Error', error);
